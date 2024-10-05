@@ -1,2 +1,5 @@
+streamlit
 matplotlib
 tensorflow
+scikit-learn
+keras
