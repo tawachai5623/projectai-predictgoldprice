@@ -11,8 +11,21 @@ df = pd.read_csv("goldstock-v2.csv")
 df["Date"] = pd.to_datetime(df.Date, format="%Y-%m-%d")
 df.index = df['Date']
 
+st.title("Gold Price Prediction")
+# แสดงกราฟราคาทองคำทั้งหมด
+st.subheader("Gold Price Over All Years")
+fig_all, ax_all = plt.subplots(figsize=(10, 6))
+ax_all.plot(df['Date'], df['Close/Last'], label="Gold Price", color='blue')
+ax_all.set_xlabel('Date')
+ax_all.set_ylabel('Price (USD)')
+ax_all.set_title("Gold Price Over Time")
+ax_all.legend()
+
+# แสดงกราฟใน Streamlit
+st.pyplot(fig_all)
+
 # เพิ่มให้ผู้ใช้สามารถเลือกปี
-st.title("Gold Price Prediction by Year")
+st.subheader("Gold Price Prediction by Year")
 selected_year = st.selectbox('Select year', options=sorted(df['Date'].dt.year.unique()))
 
 # กรองข้อมูลตามปีที่เลือก
@@ -61,7 +74,7 @@ def predict_future_prices(df, num_predictions=36):
     model.compile(optimizer='adam', loss='mean_squared_error')
 
     # ฝึกโมเดล
-    model.fit(x_train_data, y_train_data, epochs=100, batch_size=32)
+    model.fit(x_train_data, y_train_data, epochs=100, batch_size=32, verbose=0)
 
     # ทำนายอนาคต 36 เดือน
     last_60_days = df_scaled[-60:]
