@@ -1,4 +1,9 @@
 # projetai-predicgoldprice
+
+# getting-started-streamlit
+
+# requirements.txt
+
 pip install streamlit
 pip install matplotlib
 pip install tensorflow
