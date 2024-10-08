@@ -1,4 +1,4 @@
-# projetai-predicgoldprice
+# projectai-predictgoldprice
 
 # getting-started-streamlit
 
