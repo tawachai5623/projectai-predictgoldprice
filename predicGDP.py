@@ -144,14 +144,23 @@ if num_predictions > 0:
     combined_df = pd.concat([df[['Close/Last']], future_df])
 
     # แสดงกราฟ
-    plt.figure(figsize=(16, 8))
+    plt.figure(figsize=(16, 10))
     plt.plot(combined_df.index, combined_df["Close/Last"], label="Historical Gold Prices")
     plt.plot(future_df.index, future_df['Predicted Gold Price'], label="Predicted Gold Prices (2024-2026)", color='orange')
+
+    # เพิ่มการแสดงราคาทองล่าสุดที่ทำนาย
+    latest_predicted_price = predicted_future_prices[-1][0]
+    plt.scatter(future_df.index[-1], latest_predicted_price, color='red', zorder=5, label=f"Final Predicted Price: {latest_predicted_price:.2f}")
+
+    # เพิ่มการแสดงผลราคาทองในจุดสุดท้าย
+    plt.text(future_df.index[-1], latest_predicted_price, f"{latest_predicted_price:.2f}", color='red', fontsize=12)
+
     plt.xlabel('Date')
     plt.ylabel('Gold Price')
     plt.title('Gold Price Prediction for 2024-2026')
     plt.legend()
-    st.pyplot(plt)  # ใช้ st.pyplot() เพื่อแสดงกราฟใน Streamlit
+    st.pyplot(plt)
+
 
     # ใช้ cross validation ในการประเมินโมเดล MLP
     st.subheader("Cross Validation Results")
