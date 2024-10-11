@@ -164,7 +164,7 @@ if num_predictions > 0:
 
 
     # ใช้ cross validation ในการประเมินโมเดล MLP
-    st.subheader("Evaluation Model")
+    st.subheader(" Evaluation Model")
     n_folds = 5
     kf = KFold(n_splits=n_folds)
     X = x_train_data  # ข้อมูลอินพุต
