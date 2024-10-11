@@ -161,9 +161,6 @@ if num_predictions > 0:
     plt.legend()
     st.pyplot(plt)
 
-
-    # ใช้ cross validation ในการประเมินโมเดล MLP
-    st.subheader("Cross Validation Results")
     n_folds = 5
     kf = KFold(n_splits=n_folds)
     X = x_train_data  # ข้อมูลอินพุต
@@ -191,9 +188,5 @@ if num_predictions > 0:
         # ประเมินโมเดลบนชุด validation
         score = model.evaluate(X_val_fold, y_val_fold, verbose=0)
         fold_scores.append(score)
-
-    # แสดงค่าเฉลี่ยของผลลัพธ์จากทุก fold
-    mean_score = np.mean(fold_scores)
-    st.write(f"Mean cross-validation loss: {mean_score:.4f}")
 else:
     st.write("Please enter a number of months to predict.")
